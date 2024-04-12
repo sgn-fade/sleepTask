@@ -240,7 +240,7 @@ Transform:
   m_GameObject: {fileID: 639874816}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -16.56, y: -0.69, z: 0}
+  m_LocalPosition: {x: -9.21, y: -0.69, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -290,6 +290,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 742207183}
+  - component: {fileID: 742207184}
   m_Layer: 0
   m_Name: Spawners
   m_TagString: Untagged
@@ -314,6 +315,22 @@ Transform:
   - {fileID: 639874817}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &742207184
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 742207182}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 90fbf5632a8389940a76c7d4dc765d7f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  spawners:
+  - {fileID: 1440539769}
+  - {fileID: 639874816}
+  enemyPrefab: {fileID: 6512500938588654614, guid: d0e260192ce139a4a9b01ef0630620cb, type: 3}
 --- !u!1 &1366203143
 GameObject:
   m_ObjectHideFlags: 0
@@ -423,7 +440,7 @@ Transform:
   m_GameObject: {fileID: 1440539769}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 12.39, y: -0.63, z: 0}
+  m_LocalPosition: {x: 6.97, y: -0.63, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -1304,6 +1321,7 @@ GameObject:
   - component: {fileID: 1866339105}
   - component: {fileID: 1866339106}
   - component: {fileID: 1866339107}
+  - component: {fileID: 1866339108}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -1372,7 +1390,7 @@ Transform:
   m_GameObject: {fileID: 1866339101}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 3, y: 0.05, z: 0}
+  m_LocalPosition: {x: 2.92, y: -0.99, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -1461,6 +1479,19 @@ CapsuleCollider2D:
   m_Offset: {x: 0.009999956, y: 0.6978388}
   m_Size: {x: 2.4300003, y: 1.2786701}
   m_Direction: 1
+--- !u!114 &1866339108
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1866339101}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cde04437160949b449ce883617c7e4d1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  actionCooldown: 0.3
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
