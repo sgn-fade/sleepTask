@@ -1,20 +1,16 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.Serialization;
 
 public class Player : MonoBehaviour
 {
     private Animator m_animator;
     private SpriteRenderer m_sprite;
     [SerializeField] private float actionCooldown = 0.3f;
-    private bool m_isAction = false;
     private float m_timeToAction;
     private static readonly int Attack1 = Animator.StringToHash("Attack1");
     private static readonly int Block = Animator.StringToHash("Block");
 
 
-    private void Start()
+    private void Awake()
     {
         m_timeToAction = 0;
         m_animator = GetComponent<Animator>();
@@ -31,7 +27,7 @@ public class Player : MonoBehaviour
 
     private void TryRotate()
     {
-        if (m_isAction) return;
+        if (!m_animator.GetCurrentAnimatorStateInfo(0).IsName("Idle")) return;
         float inputX = Input.GetAxis("Horizontal");
         m_sprite.flipX = inputX switch
         {
@@ -45,13 +41,11 @@ public class Player : MonoBehaviour
         if (!(m_timeToAction <= 0)) return;
         if (Input.GetMouseButtonDown(0))
         {
-            m_isAction = true;
             m_animator.SetTrigger(Attack1);
             m_timeToAction = actionCooldown;
         }
         else if (Input.GetMouseButtonDown(1))
         {
-            m_isAction = true;
             m_animator.SetTrigger(Block);
             m_timeToAction = actionCooldown;
         }
