@@ -21,34 +21,36 @@ public class Player : MonoBehaviour
     {
         m_timeToAction -= Time.deltaTime;
         
-        TryRotate();
         TryAttack();
+        TryBlock();
     }
 
-    private void TryRotate()
+    private void TryRotate(float direction)
     {
-        if (!m_animator.GetCurrentAnimatorStateInfo(0).IsName("Idle")) return;
-        float inputX = Input.GetAxis("Horizontal");
-        m_sprite.flipX = inputX switch
+        m_sprite.flipX = direction switch
         {
             < 0 => true,
             > 0 => false,
             _ => m_sprite.flipX
         };
+        
     }
     private void TryAttack()
     {
-        if (!(m_timeToAction <= 0)) return;
-        if (Input.GetMouseButtonDown(0))
-        {
-            m_animator.SetTrigger(Attack1);
-            m_timeToAction = actionCooldown;
-        }
-        else if (Input.GetMouseButtonDown(1))
-        {
-            m_animator.SetTrigger(Block);
-            m_timeToAction = actionCooldown;
-        }
+        float direction = Input.GetAxisRaw("Horizontal");
+        if (!(m_timeToAction <= 0) || direction == 0) return;
+        
+        m_animator.SetTrigger(Attack1);
+        m_timeToAction = actionCooldown;
+        TryRotate(direction);
+    }
+
+    private void TryBlock()
+    {
+        if (!(Input.GetAxisRaw("Vertical") > 0) || !(m_timeToAction <= 0)) return;
+        
+        m_animator.SetTrigger(Block);
+        m_timeToAction = actionCooldown;
 
     }
 }
