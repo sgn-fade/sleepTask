@@ -9,12 +9,22 @@ public class Spawners : MonoBehaviour
     [SerializeField] private GameObject[] spawners;
 
     [SerializeField] private GameObject enemyPrefab;
-    private void Start()
+    [SerializeField] private int spawnRate = 1;
+    private double m_spawnTimer = 0;
+
+    private void Update()
     {
-        for(var i = 0; i < 5; i++)
+        m_spawnTimer += Time.deltaTime;
+
+        if (m_spawnTimer >= spawnRate)
         {
-            Instantiate(enemyPrefab,spawners[Random.Range(0, spawners.Length)].transform.position, Quaternion.identity);
-    
+            SpawnEnemy();
+            m_spawnTimer = 0;
         }
+    }
+
+    private void SpawnEnemy()
+    {
+        Instantiate(enemyPrefab,spawners[Random.Range(0, spawners.Length)].transform.position, Quaternion.identity);
     }
 }

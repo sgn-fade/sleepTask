@@ -30,7 +30,6 @@ public class Player : MonoBehaviour
     private void TryRotate(float direction)
     {
         transform.localScale = new Vector3(direction, 1, 1);
-
     }
     private void TryAttack()
     {
