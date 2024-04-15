@@ -42,9 +42,9 @@ public class Player : MonoBehaviour
         m_timeToAction = actionCooldown;
         TryRotate(direction);
 
-        foreach (GameObject enemy in m_sword.GetEnemiesList())
+        foreach (Enemy enemy in m_sword.GetEnemiesList())
         {
-            Destroy(enemy);
+            enemy.TakeDamage(1);
         }
     }
 

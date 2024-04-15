@@ -6,17 +6,15 @@ using UnityEngine;
 public class Enemy : MonoBehaviour
 {
     private Animator m_animator;
-    private static readonly int Run = Animator.StringToHash("Idle");
-    [SerializeField] private int speed = 0;
+    [SerializeField] private int speed;
+    [SerializeField] private EntityHp hpComponent;
+    private static readonly int Death = Animator.StringToHash("Death");
+
     private void Awake()
     {
         m_animator = GetComponent<Animator>();
     }
 
-    private void Start()
-    {
-        m_animator.SetTrigger("Idle");
-    }
 
     private void Update()
     {
@@ -28,5 +26,17 @@ public class Enemy : MonoBehaviour
     private void TryRotate(Vector2 direction)
     {
         transform.localScale = new Vector3(-Mathf.Sign(direction.x), 1, 1);
+    }
+
+    public void TakeDamage(int value)
+    {
+        speed = 0;
+        Debug.Log("die");
+        m_animator.SetTrigger(Death);
+    }
+
+    public void Die()
+    {
+        Destroy(gameObject);
     }
 }

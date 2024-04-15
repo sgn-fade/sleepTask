@@ -21,18 +21,20 @@ public class PlayersSword : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D other)
     {
+        Debug.Log("22");
         if (other.GetComponent<Enemy>() )
         {
-            m_enemies.Add(other.gameObject);
+            m_enemies.Add(other.GetComponent<Enemy>());
         }
     }
 
-
+    
     private void OnTriggerExit2D(Collider2D other)
     {
-        if (other.GetComponent<Enemy>() )
+        var enemy = other.GetComponent<Enemy>();
+        if (enemy && m_enemies.Contains(enemy))
         {
-            m_enemies.Remove(other.transform.parent);
+            m_enemies.Remove(enemy);
         }
     }
 }
