@@ -22,6 +22,20 @@ public class Spawners : MonoBehaviour
             m_spawnTimer = 0;
         }
     }
+    private void OnEnable()
+    {
+        Player.OnPlayerDead += OnPlayerDead;
+    }
+
+    private void OnDisable()
+    {
+        Player.OnPlayerDead -= OnPlayerDead;
+    }
+
+    private void OnPlayerDead()
+    {
+        gameObject.SetActive(false);
+    }
 
     private void SpawnEnemy()
     {

@@ -12,8 +12,11 @@ public class Player : MonoBehaviour
     private static readonly int Attack1 = Animator.StringToHash("Attack1");
     private static readonly int Block = Animator.StringToHash("Block");
     private static readonly int Hurt = Animator.StringToHash("Hurt");
+    private static readonly int Death = Animator.StringToHash("Death");
 
-
+    public delegate void PlayerDeadDelegate();
+    public static event  PlayerDeadDelegate OnPlayerDead;
+    
     private void Awake()
     {
         m_timeToAction = 0;
@@ -63,9 +66,18 @@ public class Player : MonoBehaviour
         if (other.GetComponent<Enemy>())
         {
             Destroy(other.gameObject);
-            hpComponent.TakeDamage(1);
+            if (hpComponent.TakeDamage(1))
+            {
+                OnPlayerDead?.Invoke();
+                Die();
+            };
             hpUi.ChangeText(hpComponent.GetHp());
             m_animator.SetTrigger(Hurt);
         }
+    }
+
+    private void Die()
+    {
+        m_animator.SetTrigger(Death);
     }
 }

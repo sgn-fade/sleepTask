@@ -10,14 +10,36 @@ public class Enemy : MonoBehaviour
     [SerializeField] private EntityHp hpComponent;
     private static readonly int Death = Animator.StringToHash("Death");
 
+
+    private bool playerAlive = true;
     private void Awake()
     {
         m_animator = GetComponent<Animator>();
     }
 
+    private void OnEnable()
+    {
+        Player.OnPlayerDead += OnPlayerDead;
+    }
+
+    private void OnDisable()
+    {
+        Player.OnPlayerDead -= OnPlayerDead;
+    }
+
+    private void OnPlayerDead()
+    {
+        speed = 0;
+        playerAlive = false;
+    }
 
     private void Update()
     {
+        if (!playerAlive)
+        {
+            m_animator.SetInteger("AnimState", 0);
+            return;
+        }
         m_animator.SetInteger("AnimState", 2);
         Vector2 direction = (Vector3.zero - transform.position).normalized;
         TryRotate(direction);
@@ -30,8 +52,12 @@ public class Enemy : MonoBehaviour
 
     public void TakeDamage(int value)
     {
-        speed = 0;
-        m_animator.SetTrigger(Death);
+        if (hpComponent.TakeDamage(1))
+        {
+            speed = 0;
+            m_animator.SetTrigger(Death);
+        };
+
     }
 
     public void Die()

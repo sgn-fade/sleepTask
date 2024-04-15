@@ -6,15 +6,12 @@ public class EntityHp : MonoBehaviour
 {
     [SerializeField] private int entityHp = 0;
 
-    public void TakeDamage(int value)
+    public bool TakeDamage(int value)
     {
-        if (value <= 0) return;
+        if (value <= 0) return false;
         entityHp -= value;
+        return entityHp <= 0;
 
-        if (entityHp <= 0)
-        {
-            Destroy(gameObject);
-        }
     }
 
     public int GetHp()
