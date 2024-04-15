@@ -36,18 +36,19 @@ public class Player : MonoBehaviour
     private void TryAttack()
     {
         float direction = Input.GetAxisRaw("Horizontal");
-        if (!(m_timeToAction <= 0) || direction == 0) return;
-        
+        if (!(m_timeToAction <= 0) || !(Input.GetKeyDown(KeyCode.A) || Input.GetKeyDown(KeyCode.D))) return;
         m_animator.SetTrigger(Attack1);
         m_timeToAction = actionCooldown;
         TryRotate(direction);
+    }
 
+    public void DealDamage()
+    {
         foreach (Enemy enemy in m_sword.GetEnemiesList())
         {
             enemy.TakeDamage(1);
         }
     }
-
     private void TryBlock()
     {
         if (!(Input.GetAxisRaw("Vertical") > 0) || !(m_timeToAction <= 0)) return;
