@@ -21,7 +21,6 @@ public class PlayersSword : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D other)
     {
-        Debug.Log("22");
         if (other.GetComponent<Enemy>() )
         {
             m_enemies.Add(other.GetComponent<Enemy>());

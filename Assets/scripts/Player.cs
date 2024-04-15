@@ -1,13 +1,13 @@
-using Unity.VisualScripting;
+using System;
 using UnityEngine;
 
 public class Player : MonoBehaviour
 {
     private Animator m_animator;
-    private SpriteRenderer m_sprite;
     [SerializeField] private PlayersSword m_sword;
     [SerializeField] private float actionCooldown = 0.3f;
     [SerializeField] private EntityHp hpComponent;
+    [SerializeField] private PlayerUiHp hpUi;
     private float m_timeToAction;
     private static readonly int Attack1 = Animator.StringToHash("Attack1");
     private static readonly int Block = Animator.StringToHash("Block");
@@ -18,15 +18,18 @@ public class Player : MonoBehaviour
     {
         m_timeToAction = 0;
         m_animator = GetComponent<Animator>();
-        m_sprite = GetComponent<SpriteRenderer>();
     }
 
     private void Update()
     {
         m_timeToAction -= Time.deltaTime;
-        
         TryAttack();
         TryBlock();
+    }
+
+    private void Start()
+    {
+        hpUi.ChangeText(hpComponent.GetHp());
     }
 
     private void TryRotate(float direction)
@@ -51,8 +54,7 @@ public class Player : MonoBehaviour
     }
     private void TryBlock()
     {
-        if (!(Input.GetAxisRaw("Vertical") > 0) || !(m_timeToAction <= 0)) return;
-        
+        if (!Input.GetKeyDown(KeyCode.W) || !(m_timeToAction <= 0)) return;
         m_animator.SetTrigger(Block);
         m_timeToAction = actionCooldown;
     }
@@ -62,8 +64,8 @@ public class Player : MonoBehaviour
         {
             Destroy(other.gameObject);
             hpComponent.TakeDamage(1);
+            hpUi.ChangeText(hpComponent.GetHp());
             m_animator.SetTrigger(Hurt);
-
         }
     }
 }

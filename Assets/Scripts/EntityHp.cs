@@ -16,4 +16,9 @@ public class EntityHp : MonoBehaviour
             Destroy(gameObject);
         }
     }
+
+    public int GetHp()
+    {
+        return entityHp;
+    }
 }

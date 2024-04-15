@@ -31,7 +31,6 @@ public class Enemy : MonoBehaviour
     public void TakeDamage(int value)
     {
         speed = 0;
-        Debug.Log("die");
         m_animator.SetTrigger(Death);
     }
 
