@@ -73,6 +73,5 @@ public class Enemy : MonoBehaviour
     private void SpawnScoreLabel()
     {
         Instantiate(labelScore, transform.position, Quaternion.identity);
-
     }
 }
