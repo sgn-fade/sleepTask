@@ -169,6 +169,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   speed: 2
   hpComponent: {fileID: 5012937687958493531}
+  labelScore: {fileID: 9108878552329105178, guid: cb219af203755c04ca9b675d3bef6b9d, type: 3}
   isActive: 1
 --- !u!50 &-1156838356009816856
 Rigidbody2D:

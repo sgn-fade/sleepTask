@@ -9,10 +9,12 @@ public class Enemy : MonoBehaviour
     private Animator m_animator;
     [SerializeField] private int speed;
     [SerializeField] private EntityHp hpComponent;
-    private static readonly int Death = Animator.StringToHash("Death");
+    [SerializeField] private GameObject labelScore;
 
 
     [SerializeField] private bool isActive = true;
+    
+    private static readonly int Death = Animator.StringToHash("Death");
     private static readonly int Hurt = Animator.StringToHash("Hurt");
 
     private void Awake()
@@ -33,7 +35,6 @@ public class Enemy : MonoBehaviour
     private void OnPlayerDead()
     {
         speed = 0;
-        isActive = false;
     }
 
     private void Update()
@@ -58,6 +59,7 @@ public class Enemy : MonoBehaviour
         if (hpComponent.TakeDamage(value))
         {
             m_animator.SetTrigger(Death);
+            SpawnScoreLabel();
             return;
         } 
         m_animator.SetTrigger(Hurt);
@@ -66,5 +68,11 @@ public class Enemy : MonoBehaviour
     public void Die()
     {
         Destroy(gameObject);
+    }
+
+    private void SpawnScoreLabel()
+    {
+        Instantiate(labelScore, transform.position, Quaternion.identity);
+
     }
 }
