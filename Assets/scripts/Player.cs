@@ -4,11 +4,14 @@ using UnityEngine;
 public class Player : MonoBehaviour
 {
     private Animator m_animator;
+    
     [SerializeField] private PlayersSword m_sword;
     [SerializeField] private float actionCooldown = 0.1f;
     [SerializeField] private EntityHp hpComponent;
     [SerializeField] private PlayerUiHp hpUi;
+    
     private float m_timeToAction;
+    
     private static readonly int Attack1 = Animator.StringToHash("Attack1");
     private static readonly int Block = Animator.StringToHash("Block");
     private static readonly int Hurt = Animator.StringToHash("Hurt");
