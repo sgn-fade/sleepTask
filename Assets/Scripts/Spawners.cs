@@ -2,14 +2,15 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Serialization;
 using Random = UnityEngine.Random;
 
 public class Spawners : MonoBehaviour
 {
     [SerializeField] private GameObject[] spawners;
 
-    [SerializeField] private GameObject enemyPrefab;
-    [SerializeField] private int spawnRate = 1;
+    [SerializeField] private GameObject[] enemyPrefabs;
+    [SerializeField] private int spawnRate = 2;
     private double m_spawnTimer = 0;
 
     private void Update()
@@ -39,6 +40,6 @@ public class Spawners : MonoBehaviour
 
     private void SpawnEnemy()
     {
-        Instantiate(enemyPrefab,spawners[Random.Range(0, spawners.Length)].transform.position, Quaternion.identity);
+        Instantiate(enemyPrefabs[Random.Range(0, spawners.Length)],spawners[Random.Range(0, spawners.Length)].transform.position, Quaternion.identity);
     }
 }

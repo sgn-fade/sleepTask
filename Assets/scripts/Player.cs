@@ -5,7 +5,7 @@ public class Player : MonoBehaviour
 {
     private Animator m_animator;
     [SerializeField] private PlayersSword m_sword;
-    [SerializeField] private float actionCooldown = 0.3f;
+    [SerializeField] private float actionCooldown = 0.1f;
     [SerializeField] private EntityHp hpComponent;
     [SerializeField] private PlayerUiHp hpUi;
     private float m_timeToAction;
@@ -22,7 +22,7 @@ public class Player : MonoBehaviour
         m_timeToAction = 0;
         m_animator = GetComponent<Animator>();
     }
-
+    
     private void Update()
     {
         m_timeToAction -= Time.deltaTime;

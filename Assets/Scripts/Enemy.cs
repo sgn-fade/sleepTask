@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 public class Enemy : MonoBehaviour
 {
@@ -11,7 +12,9 @@ public class Enemy : MonoBehaviour
     private static readonly int Death = Animator.StringToHash("Death");
 
 
-    private bool playerAlive = true;
+    [SerializeField] private bool isActive = true;
+    private static readonly int Hurt = Animator.StringToHash("Hurt");
+
     private void Awake()
     {
         m_animator = GetComponent<Animator>();
@@ -30,12 +33,12 @@ public class Enemy : MonoBehaviour
     private void OnPlayerDead()
     {
         speed = 0;
-        playerAlive = false;
+        isActive = false;
     }
 
     private void Update()
     {
-        if (!playerAlive)
+        if (!isActive)
         {
             m_animator.SetInteger("AnimState", 0);
             return;
@@ -52,12 +55,12 @@ public class Enemy : MonoBehaviour
 
     public void TakeDamage(int value)
     {
-        if (hpComponent.TakeDamage(1))
+        if (hpComponent.TakeDamage(value))
         {
-            speed = 0;
             m_animator.SetTrigger(Death);
-        };
-
+            return;
+        } 
+        m_animator.SetTrigger(Hurt);
     }
 
     public void Die()

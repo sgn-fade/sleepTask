@@ -167,8 +167,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8db63cccafeea5b459e396ffc9ac1474, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 4
+  speed: 2
   hpComponent: {fileID: 5012937687958493531}
+  isActive: 1
 --- !u!50 &-1156838356009816856
 Rigidbody2D:
   serializedVersion: 4
@@ -208,4 +209,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2d59295c56a9f3045ae17b29ef3023f2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  entityHp: 1
+  entityHp: 2
