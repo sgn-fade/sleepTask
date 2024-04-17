@@ -318,6 +318,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   animator: {fileID: 325323986}
+  scoreObject: {fileID: 1312515252}
 --- !u!95 &325323986
 Animator:
   serializedVersion: 5
@@ -768,7 +769,6 @@ GameObject:
   - component: {fileID: 810987659}
   - component: {fileID: 810987658}
   - component: {fileID: 810987657}
-  - component: {fileID: 810987656}
   m_Layer: 5
   m_Name: GAMEOVER
   m_TagString: Untagged
@@ -795,18 +795,6 @@ RectTransform:
   m_AnchoredPosition: {x: -474, y: -172}
   m_SizeDelta: {x: 627.3, y: 147.8}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &810987656
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 810987654}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 284b3d9c61273d444a15419cf837a02a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &810987657
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -926,7 +914,6 @@ GameObject:
   - component: {fileID: 989793430}
   - component: {fileID: 989793429}
   - component: {fileID: 989793428}
-  - component: {fileID: 989793427}
   m_Layer: 5
   m_Name: SCORE
   m_TagString: Untagged
@@ -953,18 +940,6 @@ RectTransform:
   m_AnchoredPosition: {x: -471, y: -385}
   m_SizeDelta: {x: 627.3, y: 147.8}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &989793427
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 989793425}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 284b3d9c61273d444a15419cf837a02a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &989793428
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1346,7 +1321,6 @@ GameObject:
   - component: {fileID: 1276332657}
   - component: {fileID: 1276332656}
   - component: {fileID: 1276332655}
-  - component: {fileID: 1276332654}
   m_Layer: 5
   m_Name: text  (1)
   m_TagString: Untagged
@@ -1373,18 +1347,6 @@ RectTransform:
   m_AnchoredPosition: {x: -61.700012, y: -62.200012}
   m_SizeDelta: {x: 165.78, y: 48.1}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &1276332654
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1276332652}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 284b3d9c61273d444a15419cf837a02a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &1276332655
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1504,7 +1466,6 @@ GameObject:
   - component: {fileID: 1312515257}
   - component: {fileID: 1312515256}
   - component: {fileID: 1312515255}
-  - component: {fileID: 1312515254}
   m_Layer: 5
   m_Name: VALUE
   m_TagString: Untagged
@@ -1531,18 +1492,6 @@ RectTransform:
   m_AnchoredPosition: {x: -474, y: -316}
   m_SizeDelta: {x: 627.3, y: 147.8}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &1312515254
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1312515252}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 284b3d9c61273d444a15419cf837a02a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &1312515255
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2433,7 +2382,6 @@ GameObject:
   - component: {fileID: 1574867508}
   - component: {fileID: 1574867507}
   - component: {fileID: 1574867506}
-  - component: {fileID: 1574867505}
   m_Layer: 5
   m_Name: 'text '
   m_TagString: Untagged
@@ -2460,18 +2408,6 @@ RectTransform:
   m_AnchoredPosition: {x: -62, y: -44}
   m_SizeDelta: {x: 110.77002, y: 41.600006}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &1574867505
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1574867503}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 284b3d9c61273d444a15419cf837a02a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &1574867506
 MonoBehaviour:
   m_ObjectHideFlags: 0

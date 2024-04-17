@@ -21,4 +21,9 @@ public class PlayerScore : MonoBehaviour
         Debug.Log(playerScore);
         m_textLabel.text = playerScore.ToString();
     }
+
+    public static int GetScore()
+    {
+        return playerScore;
+    }
 }

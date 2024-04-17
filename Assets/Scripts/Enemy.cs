@@ -34,7 +34,7 @@ public class Enemy : MonoBehaviour
 
     private void OnPlayerDead()
     {
-        speed = 0;
+        isActive = false;
     }
 
     private void Update()
