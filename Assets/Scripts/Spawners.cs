@@ -8,7 +8,7 @@ public class Spawners : MonoBehaviour
 
     [SerializeField] private GameObject[] enemyPrefabs;
     [SerializeField] private int spawnRate = 2;
-    private double m_spawnTimer = 0;
+    private double m_spawnTimer;
 
     private void Update()
     {

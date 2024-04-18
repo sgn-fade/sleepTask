@@ -1,11 +1,10 @@
-using System;
 using UnityEngine;
 
 public class Player : MonoBehaviour
 {
     private Animator m_animator;
     
-    [SerializeField] private PlayersSword m_sword;
+    [SerializeField] private PlayersSword sword;
     [SerializeField] private float actionCooldown = 0.1f;
     [SerializeField] private EntityHp hpComponent;
     [SerializeField] private PlayerUiHp hpUi;
@@ -53,7 +52,7 @@ public class Player : MonoBehaviour
 
     public void DealDamage()
     {
-        foreach (Enemy enemy in m_sword.GetEnemiesList())
+        foreach (Enemy enemy in sword.GetEnemiesList())
         {
             enemy.TakeDamage(1);
         }
@@ -73,7 +72,7 @@ public class Player : MonoBehaviour
             {
                 OnPlayerDead?.Invoke();
                 Die();
-            };
+            }
             hpUi.ChangeText(hpComponent.GetHp());
             m_animator.SetTrigger(Hurt);
         }

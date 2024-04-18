@@ -1,46 +1,47 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
-public class GameOver : MonoBehaviour
+namespace Scenes.GoverScreen
 {
-    [SerializeField] private Animator animator;
-    [SerializeField] private GameObject scoreObject;
-
-    private Text scoreText;
-    private void OnEnable()
+    public class GameOver : MonoBehaviour
     {
-        Player.OnPlayerDead += OnPlayerDead;
-    }
+        [SerializeField] private Animator animator;
+        [SerializeField] private GameObject scoreObject;
 
-    private void Start()
-    {
-        scoreText = scoreObject.GetComponent<Text>();
-    }
+        private Text m_scoreText;
+        private void OnEnable()
+        {
+            Player.OnPlayerDead += OnPlayerDead;
+        }
 
-    private void OnDisable()
-    {
-        Player.OnPlayerDead -= OnPlayerDead;
-    }
+        private void Start()
+        {
+            m_scoreText = scoreObject.GetComponent<Text>();
+        }
 
-    private void OnPlayerDead()
-    {
-        animator.SetTrigger("main");
-        scoreText.text = PlayerScore.GetScore().ToString();
-    }
+        private void OnDisable()
+        {
+            Player.OnPlayerDead -= OnPlayerDead;
+        }
 
-    public void OnRetryPressed()
-    {
-        Debug.Log(1);
-        Scene scene = SceneManager.GetActiveScene();
-        SceneManager.LoadScene(scene.name);
-    }
+        private void OnPlayerDead()
+        {
+            animator.SetTrigger("main");
+            m_scoreText.text = PlayerScore.GetScore().ToString();
+        }
 
-    public void OnQuitPressed()
-    {
-        Application.Quit();
+        public void OnRetryPressed()
+        {
+            Scene scene = SceneManager.GetActiveScene();
+            SceneManager.LoadScene(scene.name);
+
+            PlayerScore.Reset();
+        }
+
+        public void OnQuitPressed()
+        {
+            Application.Quit();
+        }
     }
 }
