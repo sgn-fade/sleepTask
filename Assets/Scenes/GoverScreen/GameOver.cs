@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class GameOver : MonoBehaviour
@@ -29,5 +30,17 @@ public class GameOver : MonoBehaviour
     {
         animator.SetTrigger("main");
         scoreText.text = PlayerScore.GetScore().ToString();
+    }
+
+    public void OnRetryPressed()
+    {
+        Debug.Log(1);
+        Scene scene = SceneManager.GetActiveScene();
+        SceneManager.LoadScene(scene.name);
+    }
+
+    public void OnQuitPressed()
+    {
+        Application.Quit();
     }
 }
