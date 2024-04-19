@@ -12,7 +12,7 @@ public class Player : MonoBehaviour
     private float m_timeToAction;
     
     private static readonly int Attack1 = Animator.StringToHash("Attack1");
-    private static readonly int Block = Animator.StringToHash("Block");
+    private static readonly int Dodge = Animator.StringToHash("Roll");
     private static readonly int Hurt = Animator.StringToHash("Hurt");
     private static readonly int Death = Animator.StringToHash("Death");
 
@@ -29,7 +29,7 @@ public class Player : MonoBehaviour
     {
         m_timeToAction -= Time.deltaTime;
         TryAttack();
-        TryBlock();
+        TryDodge();
     }
 
     private void Start()
@@ -44,7 +44,7 @@ public class Player : MonoBehaviour
     private void TryAttack()
     {
         float direction = Input.GetAxisRaw("Horizontal");
-        if (!(m_timeToAction <= 0) || !(Input.GetKeyDown(KeyCode.A) || Input.GetKeyDown(KeyCode.D))) return;
+        if (!(m_timeToAction <= 0) || !(Input.GetKeyDown(KeyCode.A) || Input.GetKeyDown(KeyCode.D)) || direction == 0) return;
         m_animator.SetTrigger(Attack1);
         m_timeToAction = actionCooldown;
         TryRotate(direction);
@@ -57,10 +57,10 @@ public class Player : MonoBehaviour
             enemy.TakeDamage(1);
         }
     }
-    private void TryBlock()
+    private void TryDodge()
     {
-        if (!Input.GetKeyDown(KeyCode.W) || !(m_timeToAction <= 0)) return;
-        m_animator.SetTrigger(Block);
+        if (!Input.GetKeyDown(KeyCode.S) || !(m_timeToAction <= 0)) return;
+        m_animator.SetTrigger(Dodge);
         m_timeToAction = actionCooldown;
     }
     private void OnTriggerEnter2D(Collider2D other)
