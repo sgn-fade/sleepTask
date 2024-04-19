@@ -15,6 +15,7 @@ public class Enemy : MonoBehaviour
 
     private void Awake()
     {
+        gameObject.tag = "Enemy";
         m_animator = GetComponent<Animator>();
     }
 

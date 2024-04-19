@@ -37,6 +37,6 @@ public class Spawners : MonoBehaviour
 
     private void SpawnEnemy()
     {
-        Instantiate(enemyPrefabs[Random.Range(0, spawners.Length)],spawners[Random.Range(0, spawners.Length)].transform.position, Quaternion.identity);
+        Instantiate(enemyPrefabs[Random.Range(0, enemyPrefabs.Length)],spawners[Random.Range(0, spawners.Length)].transform.position, Quaternion.identity);
     }
 }

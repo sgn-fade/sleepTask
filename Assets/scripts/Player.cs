@@ -65,7 +65,7 @@ public class Player : MonoBehaviour
     }
     private void OnTriggerEnter2D(Collider2D other)
     {
-        if (other.GetComponent<Enemy>())
+        if (other.CompareTag("Enemy"))
         {
             Destroy(other.gameObject);
             if (hpComponent.TakeDamage(1))
