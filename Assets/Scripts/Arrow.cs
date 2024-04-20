@@ -1,4 +1,3 @@
-using System;
 using UnityEngine;
 
 public class Arrow : MonoBehaviour
@@ -6,6 +5,8 @@ public class Arrow : MonoBehaviour
     [SerializeField] private bool isActive = true;
     [SerializeField] private int speed;
     private Vector2 m_velocity;
+
+    private double m_lifetime = 4.0;
     private void OnEnable()
     {
         Player.OnPlayerDead += OnPlayerDead;
@@ -36,6 +37,12 @@ public class Arrow : MonoBehaviour
 
     private void Update()
     {
+        m_lifetime -= Time.deltaTime;
+
+        if (m_lifetime <= 0)
+        {
+            Destroy(gameObject);
+        }
         if (!isActive)
         {
             return;

@@ -5,7 +5,7 @@ public class Player : MonoBehaviour
     private Animator m_animator;
     
     [SerializeField] private PlayersSword sword;
-    [SerializeField] private float actionCooldown = 0.1f;
+    [SerializeField] private float actionCooldown = 0.04f;
     [SerializeField] private EntityHp hpComponent;
     [SerializeField] private PlayerUiHp hpUi;
     
