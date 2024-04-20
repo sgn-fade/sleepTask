@@ -54,4 +54,9 @@ public class Arrow : MonoBehaviour
     {
         transform.localScale = new Vector3(Mathf.Sign(direction.x) * 3, 3, 1);
     }
+
+    public void SetParried()
+    {
+        m_velocity.x *= -1;
+    }
 }

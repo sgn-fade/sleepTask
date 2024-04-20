@@ -15,6 +15,7 @@ public class Player : MonoBehaviour
     private static readonly int Dodge = Animator.StringToHash("Roll");
     private static readonly int Hurt = Animator.StringToHash("Hurt");
     private static readonly int Death = Animator.StringToHash("Death");
+    private static readonly int Block = Animator.StringToHash("Block");
 
     public delegate void PlayerDeadDelegate();
     public static event  PlayerDeadDelegate OnPlayerDead;
@@ -30,6 +31,7 @@ public class Player : MonoBehaviour
         m_timeToAction -= Time.deltaTime;
         TryAttack();
         TryDodge();
+        TryBlock();
     }
 
     private void Start()
@@ -61,6 +63,12 @@ public class Player : MonoBehaviour
     {
         if (!Input.GetKeyDown(KeyCode.S) || !(m_timeToAction <= 0)) return;
         m_animator.SetTrigger(Dodge);
+        m_timeToAction = actionCooldown;
+    }
+    private void TryBlock()
+    {
+        if (!Input.GetKeyDown(KeyCode.W) || !(m_timeToAction <= 0)) return;
+        m_animator.SetTrigger(Block);
         m_timeToAction = actionCooldown;
     }
     private void OnTriggerEnter2D(Collider2D other)
