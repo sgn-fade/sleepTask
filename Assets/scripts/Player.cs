@@ -77,7 +77,7 @@ public class Player : MonoBehaviour
     }
     private void TryCast()
     {
-        if (!Input.GetKeyDown(KeyCode.F) || skillCooldown > 0) return ;
+        if (!Input.GetKeyDown(KeyCode.F) || skillCooldown <= 0) return ;
         Instantiate(skillScene, Vector3.zero, Quaternion.identity);
         m_animator.SetTrigger(Skill);
     }
