@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 
 public class Arrow : MonoBehaviour
@@ -5,8 +6,9 @@ public class Arrow : MonoBehaviour
     [SerializeField] private bool isActive = true;
     [SerializeField] private int speed;
     private Vector2 m_velocity;
-
+    private bool m_isParried = false;
     private double m_lifetime = 4.0;
+
     private void OnEnable()
     {
         Player.OnPlayerDead += OnPlayerDead;
@@ -25,9 +27,9 @@ public class Arrow : MonoBehaviour
     private void Start()
     {
         gameObject.tag = "Enemy";
-        
+
         var transform1 = transform;
-        
+
         var position = transform1.position;
         position.y = 1;
         transform1.position = position;
@@ -37,19 +39,18 @@ public class Arrow : MonoBehaviour
 
     private void Update()
     {
-        m_lifetime -= Time.deltaTime;
+        if (!isActive) return;
 
+        m_lifetime -= Time.deltaTime;
         if (m_lifetime <= 0)
         {
             Destroy(gameObject);
         }
-        if (!isActive)
-        {
-            return;
-        }
+        
         TryRotate(m_velocity);
         transform.Translate(m_velocity * (Time.deltaTime * speed));
     }
+
     private void TryRotate(Vector2 direction)
     {
         transform.localScale = new Vector3(Mathf.Sign(direction.x) * 3, 3, 1);
@@ -58,5 +59,17 @@ public class Arrow : MonoBehaviour
     public void SetParried()
     {
         m_velocity.x *= -1;
+        m_isParried = true;
+    }
+
+    private void OnTriggerEnter2D(Collider2D other)
+    {
+        Debug.Log(other);
+        Enemy enemy = other.GetComponent<Enemy>();
+        if (enemy && m_isParried)
+        {
+            enemy.TakeDamage(10);
+            Destroy(gameObject);
+        }
     }
 }
