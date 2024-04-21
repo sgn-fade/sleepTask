@@ -19,7 +19,7 @@ public class Player : MonoBehaviour
 
     public delegate void PlayerDeadDelegate();
     public static event  PlayerDeadDelegate OnPlayerDead;
-    
+        
     private void Awake()
     {
         m_timeToAction = 0;
@@ -29,9 +29,8 @@ public class Player : MonoBehaviour
     private void Update()
     {
         m_timeToAction -= Time.deltaTime;
-        TryAttack();
-        TryDodge();
-        TryBlock();
+        TryRotate();
+        TryAction();
     }
 
     private void Start()
@@ -39,38 +38,42 @@ public class Player : MonoBehaviour
         hpUi.ChangeText(hpComponent.GetHp());
     }
 
-    private void TryRotate(float direction)
-    {
-        transform.localScale = new Vector3(direction, 1, 1);
-    }
-    private void TryAttack()
+    private void TryRotate()
     {
         float direction = Input.GetAxisRaw("Horizontal");
-        if (!(m_timeToAction <= 0) || !(Input.GetKeyDown(KeyCode.A) || Input.GetKeyDown(KeyCode.D)) || direction == 0) return;
-        m_animator.SetTrigger(Attack1);
-        m_timeToAction = actionCooldown;
-        TryRotate(direction);
+        if (!(Input.GetKeyDown(KeyCode.A) || Input.GetKeyDown(KeyCode.D)) || direction == 0) return;
+        transform.localScale = new Vector3(direction, 1, 1);
     }
 
-    public void DealDamage()
+    private void TryAction()
     {
-        foreach (Enemy enemy in sword.GetEnemiesList())
+        if (m_timeToAction > 0)return;
+
+        if (TryBlock() || TryDodge() || TryAttack())
         {
-            enemy.TakeDamage(1);
+            m_timeToAction = actionCooldown;
         }
     }
-    private void TryDodge()
+    private bool TryAttack()
     {
-        if (!Input.GetKeyDown(KeyCode.S) || !(m_timeToAction <= 0)) return;
+        if (!Input.GetKeyDown(KeyCode.Mouse0)) return false;
+        m_animator.SetTrigger(Attack1);
+        return true;
+
+    }
+    private bool TryDodge()
+    {
+        if (!Input.GetKeyDown(KeyCode.S)) return false;
         m_animator.SetTrigger(Dodge);
-        m_timeToAction = actionCooldown;
+        return true;
     }
-    private void TryBlock()
+    private bool TryBlock()
     {
-        if (!Input.GetKeyDown(KeyCode.W) || !(m_timeToAction <= 0)) return;
+        if (!Input.GetKeyDown(KeyCode.W)) return false;
         m_animator.SetTrigger(Block);
-        m_timeToAction = actionCooldown;
+        return true;
     }
+    
     private void OnTriggerEnter2D(Collider2D other)
     {
         if (other.CompareTag("Enemy"))
@@ -85,7 +88,14 @@ public class Player : MonoBehaviour
             m_animator.SetTrigger(Hurt);
         }
     }
-
+    public void DealDamage()
+    {
+        foreach (Enemy enemy in sword.GetEnemiesList())
+        {
+            enemy.TakeDamage(1);
+        }
+    }
+    
     private void Die()
     {
         m_animator.SetTrigger(Death);
