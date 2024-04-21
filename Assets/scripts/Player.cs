@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.Serialization;
 
 public class Player : MonoBehaviour
 {
@@ -8,14 +9,16 @@ public class Player : MonoBehaviour
     [SerializeField] private float actionCooldown = 0.04f;
     [SerializeField] private EntityHp hpComponent;
     [SerializeField] private PlayerUiHp hpUi;
-    
-    private float m_timeToAction;
+
+    [SerializeField] private GameObject skillScene;
+    private double m_timeToAction;
     
     private static readonly int Attack1 = Animator.StringToHash("Attack1");
     private static readonly int Dodge = Animator.StringToHash("Roll");
     private static readonly int Hurt = Animator.StringToHash("Hurt");
     private static readonly int Death = Animator.StringToHash("Death");
     private static readonly int Block = Animator.StringToHash("Block");
+    private static readonly int Skill = Animator.StringToHash("Skill");
 
     public delegate void PlayerDeadDelegate();
     public static event  PlayerDeadDelegate OnPlayerDead;
@@ -48,8 +51,13 @@ public class Player : MonoBehaviour
     private void TryAction()
     {
         if (m_timeToAction > 0)return;
-
-        if (TryBlock() || TryDodge() || TryAttack())
+    
+        if(TryCast())
+        {
+            m_timeToAction = actionCooldown + 0.6;
+            return;
+        }
+        if (TryBlock() || TryDodge() || TryAttack() )
         {
             m_timeToAction = actionCooldown;
         }
@@ -71,6 +79,13 @@ public class Player : MonoBehaviour
     {
         if (!Input.GetKeyDown(KeyCode.W)) return false;
         m_animator.SetTrigger(Block);
+        return true;
+    }
+    private bool TryCast()
+    {
+        if (!Input.GetKeyDown(KeyCode.F)) return false;
+        Instantiate(skillScene, Vector3.zero, Quaternion.identity);
+        m_animator.SetTrigger(Skill);
         return true;
     }
     
