@@ -1,5 +1,6 @@
 using UnityEngine;
 using UnityEngine.Serialization;
+using UnityEngine.XR;
 
 public class Player : MonoBehaviour
 {
@@ -7,6 +8,7 @@ public class Player : MonoBehaviour
     
     [SerializeField] private PlayersSword sword;
     [SerializeField] private float actionCooldown = 0.04f;
+    [SerializeField] private float skillCooldown = 5f;
     [SerializeField] private EntityHp hpComponent;
     [SerializeField] private PlayerUiHp hpUi;
 
@@ -32,6 +34,7 @@ public class Player : MonoBehaviour
     private void Update()
     {
         m_timeToAction -= Time.deltaTime;
+        skillCooldown -= Time.deltaTime;
         TryRotate();
         TryAction();
     }
@@ -51,44 +54,42 @@ public class Player : MonoBehaviour
     private void TryAction()
     {
         if (m_timeToAction > 0)return;
-    
-        if(TryCast())
-        {
-            m_timeToAction = actionCooldown + 0.6;
-            return;
-        }
-        if (TryBlock() || TryDodge() || TryAttack() )
-        {
-            m_timeToAction = actionCooldown;
-        }
+        TryCast();
+        TryBlock();
+        TryDodge();
+        TryAttack();
     }
-    private bool TryAttack()
+    private void TryAttack()
     {
-        if (!Input.GetKeyDown(KeyCode.Mouse0)) return false;
+        if (!Input.GetKeyDown(KeyCode.Mouse0)) return;
         m_animator.SetTrigger(Attack1);
-        return true;
-
+        
     }
-    private bool TryDodge()
+    private void TryDodge()
     {
-        if (!Input.GetKeyDown(KeyCode.S)) return false;
+        if (!Input.GetKeyDown(KeyCode.S)) return;
         m_animator.SetTrigger(Dodge);
-        return true;
     }
-    private bool TryBlock()
+    private void TryBlock()
     {
-        if (!Input.GetKeyDown(KeyCode.W)) return false;
+        if (!Input.GetKeyDown(KeyCode.W)) return ;
         m_animator.SetTrigger(Block);
-        return true;
     }
-    private bool TryCast()
+    private void TryCast()
     {
-        if (!Input.GetKeyDown(KeyCode.F)) return false;
+        if (!Input.GetKeyDown(KeyCode.F) || skillCooldown > 0) return ;
         Instantiate(skillScene, Vector3.zero, Quaternion.identity);
         m_animator.SetTrigger(Skill);
-        return true;
     }
-    
+
+    private void StartCooldown(float time)
+    {
+        if (time == 0)
+        {
+            time = actionCooldown;
+        }
+        m_timeToAction = time;
+    }
     private void OnTriggerEnter2D(Collider2D other)
     {
         if (other.CompareTag("Enemy"))
