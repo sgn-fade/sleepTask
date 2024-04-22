@@ -57,7 +57,7 @@ SpriteRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: b58354c186d9bde42ad2a4ab0545dde9, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -170,6 +170,7 @@ MonoBehaviour:
   speed: 2
   hpComponent: {fileID: 5012937687958493531}
   labelScore: {fileID: 9108878552329105178, guid: cb219af203755c04ca9b675d3bef6b9d, type: 3}
+  m_material: {fileID: 2100000, guid: b58354c186d9bde42ad2a4ab0545dde9, type: 2}
   isActive: 1
 --- !u!50 &-1156838356009816856
 Rigidbody2D:

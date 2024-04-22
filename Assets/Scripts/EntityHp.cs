@@ -12,7 +12,12 @@ public class EntityHp : MonoBehaviour
         return entityHp <= 0;
 
     }
-
+    public void Heal(int value)
+    {
+        if (value <= 0) return;
+        entityHp += value;
+    }
+    
     public int GetHp()
     {
         return entityHp;

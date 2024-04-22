@@ -6010,12 +6010,12 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   m_FontData:
-    m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
-    m_FontSize: 90
+    m_Font: {fileID: 12800000, guid: 5b3c2d3fd36e750419a2aa935e780791, type: 3}
+    m_FontSize: 153
     m_FontStyle: 1
     m_BestFit: 0
     m_MinSize: 2
-    m_MaxSize: 90
+    m_MaxSize: 153
     m_Alignment: 1
     m_AlignByGeometry: 0
     m_RichText: 1
@@ -6288,8 +6288,8 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   m_FontData:
-    m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
-    m_FontSize: 50
+    m_Font: {fileID: 12800000, guid: 5b3c2d3fd36e750419a2aa935e780791, type: 3}
+    m_FontSize: 71
     m_FontStyle: 1
     m_BestFit: 0
     m_MinSize: 2
@@ -6842,12 +6842,12 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   m_FontData:
-    m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
-    m_FontSize: 70
+    m_Font: {fileID: 12800000, guid: 5b3c2d3fd36e750419a2aa935e780791, type: 3}
+    m_FontSize: 106
     m_FontStyle: 1
     m_BestFit: 0
     m_MinSize: 2
-    m_MaxSize: 90
+    m_MaxSize: 113
     m_Alignment: 1
     m_AlignByGeometry: 0
     m_RichText: 1
@@ -8629,7 +8629,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   sword: {fileID: 1922331642}
-  actionCooldown: 0.1
+  actionCooldown: 0.3
   skillCooldown: 5
   hpComponent: {fileID: 1866339109}
   hpUi: {fileID: 1203625815}

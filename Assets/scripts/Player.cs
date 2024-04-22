@@ -117,7 +117,9 @@ public class Player : MonoBehaviour
     {
         foreach (Enemy enemy in sword.GetEnemiesList())
         {
-            enemy.TakeDamage(1);
+            if (!enemy.TakeDamage(1) || !enemy.TryGetHealing()) continue;
+            hpComponent.Heal(1);
+            hpUi.ChangeText(hpComponent.GetHp());
         }
     }
     

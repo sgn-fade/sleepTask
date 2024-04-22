@@ -1,4 +1,6 @@
+using System;
 using UnityEngine;
+using Random = UnityEngine.Random;
 
 public class Enemy : MonoBehaviour
 {
@@ -7,8 +9,8 @@ public class Enemy : MonoBehaviour
     [SerializeField] private EntityHp hpComponent;
     [SerializeField] private GameObject labelScore;
 
-
     [SerializeField] private bool isActive = true;
+    private bool isHealing;
     
     private static readonly int Death = Animator.StringToHash("Death");
     private static readonly int Hurt = Animator.StringToHash("Hurt");
@@ -29,9 +31,22 @@ public class Enemy : MonoBehaviour
         Player.OnPlayerDead -= OnPlayerDead;
     }
 
+    public bool TryGetHealing()
+    {
+        return isHealing;
+    }
     private void OnPlayerDead()
     {
         isActive = false;
+    }
+
+    private void Start()
+    {
+        if (Random.Range(0, 100) < 20)
+        {
+            isHealing = true;
+            GetComponent<Renderer>().material.color = new Color((float)0.6, 1, (float)0.5);
+        }
     }
 
     private void Update()
@@ -51,15 +66,20 @@ public class Enemy : MonoBehaviour
         transform.localScale = new Vector3(-Mathf.Sign(direction.x), 1, 1);
     }
 
-    public void TakeDamage(int value)
+    public bool TakeDamage(int value)
     {
         if (hpComponent.TakeDamage(value))
         {
             m_animator.SetTrigger(Death);
             SpawnScoreLabel();
-            return;
-        } 
-        m_animator.SetTrigger(Hurt);
+            return true;
+        }
+
+        if (m_animator != null)
+        {
+            m_animator.SetTrigger(Hurt);
+        }
+        return false;
     }
 
     public void Die()
