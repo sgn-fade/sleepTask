@@ -11,9 +11,11 @@ public class Player : MonoBehaviour
     [SerializeField] private float skillCooldown = 5f;
     [SerializeField] private EntityHp hpComponent;
     [SerializeField] private PlayerUiHp hpUi;
-
+    [SerializeField] private ParticleSystem skillParticles;
     [SerializeField] private GameObject skillScene;
+    
     private double m_timeToAction;
+    private double m_timeToSkill;
     
     private static readonly int Attack1 = Animator.StringToHash("Attack1");
     private static readonly int Dodge = Animator.StringToHash("Roll");
@@ -34,7 +36,12 @@ public class Player : MonoBehaviour
     private void Update()
     {
         m_timeToAction -= Time.deltaTime;
-        skillCooldown -= Time.deltaTime;
+        m_timeToSkill -= Time.deltaTime;
+        if (!skillParticles.isEmitting && m_timeToSkill <= 0)
+        {
+            skillParticles.Play();
+        }
+        
         TryRotate();
         TryAction();
     }
@@ -77,9 +84,11 @@ public class Player : MonoBehaviour
     }
     private void TryCast()
     {
-        if (!Input.GetKeyDown(KeyCode.F) || skillCooldown <= 0) return ;
+        if (!Input.GetKeyDown(KeyCode.F) || m_timeToSkill > 0) return ;
         Instantiate(skillScene, Vector3.zero, Quaternion.identity);
         m_animator.SetTrigger(Skill);
+        m_timeToSkill = skillCooldown;
+        skillParticles.Stop();
     }
 
     private void StartCooldown(float time)
