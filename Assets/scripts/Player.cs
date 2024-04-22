@@ -7,7 +7,7 @@ public class Player : MonoBehaviour
     private Animator m_animator;
     
     [SerializeField] private PlayersSword sword;
-    [SerializeField] private float actionCooldown = 0.04f;
+    [SerializeField] private float actionCooldown;
     [SerializeField] private float skillCooldown = 5f;
     [SerializeField] private EntityHp hpComponent;
     [SerializeField] private PlayerUiHp hpUi;
@@ -60,7 +60,7 @@ public class Player : MonoBehaviour
 
     private void TryAction()
     {
-        if (m_timeToAction > 0)return;
+        if (m_timeToAction > 0 || hpComponent.GetHp() <= 0)return;
         TryCast();
         TryBlock();
         TryDodge();

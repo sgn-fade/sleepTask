@@ -7,7 +7,7 @@ public class EntityHp : MonoBehaviour
 
     public bool TakeDamage(int value)
     {
-        if (value <= 0) return false;
+        if (value <= 0 || entityHp == 0) return false;
         entityHp -= value;
         return entityHp <= 0;
 
