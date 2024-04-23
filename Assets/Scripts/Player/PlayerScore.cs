@@ -15,7 +15,6 @@ public class PlayerScore : MonoBehaviour
     public static void UpdateScore(int value)
     {
         _playerScore += value;
-        Debug.Log(_playerScore);
         _textLabel.text = _playerScore.ToString();
     }
 

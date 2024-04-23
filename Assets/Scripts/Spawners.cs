@@ -22,12 +22,12 @@ public class Spawners : MonoBehaviour
     }
     private void OnEnable()
     {
-        Player.OnPlayerDead += OnPlayerDead;
+        Player.Player.OnPlayerDead += OnPlayerDead;
     }
 
     private void OnDisable()
     {
-        Player.OnPlayerDead -= OnPlayerDead;
+        Player.Player.OnPlayerDead -= OnPlayerDead;
     }
 
     private void OnPlayerDead()

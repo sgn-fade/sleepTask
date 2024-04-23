@@ -12,7 +12,7 @@ namespace Scenes.GoverScreen
         private Text m_scoreText;
         private void OnEnable()
         {
-            Player.OnPlayerDead += OnPlayerDead;
+            Player.Player.OnPlayerDead += OnPlayerDead;
         }
 
         private void Start()
@@ -22,7 +22,7 @@ namespace Scenes.GoverScreen
 
         private void OnDisable()
         {
-            Player.OnPlayerDead -= OnPlayerDead;
+            Player.Player.OnPlayerDead -= OnPlayerDead;
         }
 
         private void OnPlayerDead()
@@ -35,7 +35,6 @@ namespace Scenes.GoverScreen
         {
             Scene scene = SceneManager.GetActiveScene();
             SceneManager.LoadScene(scene.name);
-
             PlayerScore.Reset();
         }
 

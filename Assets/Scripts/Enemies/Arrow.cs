@@ -6,17 +6,17 @@ public class Arrow : MonoBehaviour
     [SerializeField] private bool isActive = true;
     [SerializeField] private int speed;
     private Vector2 m_velocity;
-    private bool m_isParried = false;
+    private bool m_isParried;
     private double m_lifetime = 4.0;
 
     private void OnEnable()
     {
-        Player.OnPlayerDead += OnPlayerDead;
+        Player.Player.OnPlayerDead += OnPlayerDead;
     }
 
     private void OnDisable()
     {
-        Player.OnPlayerDead -= OnPlayerDead;
+        Player.Player.OnPlayerDead -= OnPlayerDead;
     }
 
     private void OnPlayerDead()
@@ -64,7 +64,6 @@ public class Arrow : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D other)
     {
-        Debug.Log(other);
         Enemy enemy = other.GetComponent<Enemy>();
         if (enemy && m_isParried)
         {

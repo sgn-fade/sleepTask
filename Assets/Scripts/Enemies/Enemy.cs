@@ -1,4 +1,3 @@
-using System;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
@@ -10,7 +9,7 @@ public class Enemy : MonoBehaviour
     [SerializeField] private GameObject labelScore;
 
     [SerializeField] private bool isActive = true;
-    private bool isHealing;
+    private bool m_isHealing;
     
     private static readonly int Death = Animator.StringToHash("Death");
     private static readonly int Hurt = Animator.StringToHash("Hurt");
@@ -23,17 +22,17 @@ public class Enemy : MonoBehaviour
 
     private void OnEnable()
     {
-        Player.OnPlayerDead += OnPlayerDead;
+        Player.Player.OnPlayerDead += OnPlayerDead;
     }
 
     private void OnDisable()
     {
-        Player.OnPlayerDead -= OnPlayerDead;
+        Player.Player.OnPlayerDead -= OnPlayerDead;
     }
 
     public bool TryGetHealing()
     {
-        return isHealing;
+        return m_isHealing;
     }
     private void OnPlayerDead()
     {
@@ -44,7 +43,7 @@ public class Enemy : MonoBehaviour
     {
         if (Random.Range(0, 100) < 20)
         {
-            isHealing = true;
+            m_isHealing = true;
             GetComponent<Renderer>().material.color = new Color((float)0.6, 1, (float)0.5);
         }
     }
