@@ -1,30 +1,33 @@
 using UnityEngine;
 using UnityEngine.UI;
 
-public class PlayerScore : MonoBehaviour
+namespace Player
 {
-    private static int _playerScore;
-
-    [SerializeField] private GameObject textObj;
-    private static Text _textLabel;
-    private void Start()
+    public class PlayerScore : MonoBehaviour
     {
-        _textLabel = textObj.GetComponent<Text>();
-    }
+        private static int _playerScore;
 
-    public static void UpdateScore(int value)
-    {
-        _playerScore += value;
-        _textLabel.text = _playerScore.ToString();
-    }
+        [SerializeField] private GameObject textObj;
+        private static Text _textLabel;
+        private void Start()
+        {
+            _textLabel = textObj.GetComponent<Text>();
+        }
 
-    public static int GetScore()
-    {
-        return _playerScore;
-    }
+        public static void UpdateScore(int value)
+        {
+            _playerScore += value;
+            _textLabel.text = _playerScore.ToString();
+        }
 
-    public static void Reset()
-    {
-        _playerScore = 0;
+        public static int GetScore()
+        {
+            return _playerScore;
+        }
+
+        public static void Reset()
+        {
+            _playerScore = 0;
+        }
     }
 }

@@ -28,8 +28,7 @@ public class PlayersSword : MonoBehaviour
     
     private void OnTriggerExit2D(Collider2D other)
     {
-        var enemy = other.GetComponent<Enemy>();
-        if (enemy && m_enemies.Contains(enemy))
+        if (other.TryGetComponent(out Enemy enemy))
         {
             m_enemies.Remove(enemy);
         }

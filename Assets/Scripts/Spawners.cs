@@ -1,25 +1,19 @@
 
+using System;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
 public class Spawners : MonoBehaviour
 {
     [SerializeField] private GameObject[] spawners;
-
     [SerializeField] private GameObject[] enemyPrefabs;
-    [SerializeField] private int spawnRate = 1;
-    private double m_spawnTimer;
+    private float m_spawnTimer = 1f;
 
-    private void Update()
+    private void Start()
     {
-        m_spawnTimer += Time.deltaTime;
-
-        if (m_spawnTimer >= spawnRate)
-        {
-            SpawnEnemy();
-            m_spawnTimer = 0;
-        }
+        Invoke(nameof(SpawnEnemy), m_spawnTimer);
     }
+    
     private void OnEnable()
     {
         Player.Player.OnPlayerDead += OnPlayerDead;
@@ -38,5 +32,6 @@ public class Spawners : MonoBehaviour
     private void SpawnEnemy()
     {
         Instantiate(enemyPrefabs[Random.Range(0, enemyPrefabs.Length)],spawners[Random.Range(0, spawners.Length)].transform.position, Quaternion.identity);
+        Invoke(nameof(SpawnEnemy), m_spawnTimer);
     }
 }
